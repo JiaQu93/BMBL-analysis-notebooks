@@ -66,7 +66,7 @@ Before running this pipeline, you will need the following:
 
 
 ## How to submit jobs (OSC-> open in terminal)
-
+3. Submit batch file
 sbatch Y11789_LockeL_5-Control-4-Mock_V1G_1.sh
 squeue -u qujia93
 
