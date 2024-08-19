@@ -34,11 +34,41 @@ Before running this pipeline, you will need the following:
 
 
 ## How to organize your working directory
+	1. Edit csv file:
+	
+![image](https://github.com/user-attachments/assets/e0930ff2-6ec0-437a-b33a-4ef6ee2c6e04)
 
-Please describe and include screenshot to show how to correctly place code and files
+	1) Reference: human sample - GRCh, mouse sample - mm
+	2) fastq_id: raw data fastq.gz file name
+	3) fasqs: pathway of fastq.gz file
+	4) [samples]: unique barcode for each sample in a pool; description: sample name
 
 ## How to set up input parameters
+	2. Prepare sh file:
+	
+	#!/usr/bin/bash
+	#SBATCH --account PAS2584
+	#SBATCH --time=10:00:00
+	#SBATCH --nodes=1 
+	#SBATCH --ntasks=8
+	#SBATCH --mem=64GB
+	date
+	CellRanger=/fs/ess/PCON0022/tools/cellranger-7.1.0/cellranger
+	cd /fs/ess/PAS2584/scRNA.analysis.Jia.Apr2024/Raw.fastq.data
+	${CellRanger} multi --id=Y11789_LockeL_5-Control-4-Mock_V1G_1 --csv=Y11789_LockeL_5-Control-4-Mock_V1G_1.csv --localcores=8  --localmem=64
+	date
+	
+	# save as Y11789_LockeL_5-Control-4-Mock_V1G_1.sh
+
+	Note: 
+	1) cd /fs/ess/PAS2584/scRNA.analysis.Jia.Apr2024/Raw.fastq.data (the parent folder of fastq.file)
+	2) --id= is fastq_id in csv file
 
 
-## How to submit jobs
+## How to submit jobs (OSC-> open in terminal)
+
+sbatch Y11789_LockeL_5-Control-4-Mock_V1G_1.sh
+squeue -u qujia93
+
+slurm-28722802.out (check the real-time running results in this file)
 
